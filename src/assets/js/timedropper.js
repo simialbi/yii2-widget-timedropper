@@ -62,6 +62,7 @@
             };
 
             _td_input.prop({
+                'tabindex': '-1',
                 'readonly': true
             }).addClass('td-input');
 
@@ -381,12 +382,12 @@
 
             _td_init();
 
-            _td_input.focus(function (e) {
+            _td_input.on('focus', function (e) {
                 e.preventDefault();
                 _td_input.blur();
             });
 
-            _td_input.click(function () {
+            _td_input.on('click', function () {
                 clearInterval(_td_event);
 
                 _td_container.removeClass('td-fadeout');
