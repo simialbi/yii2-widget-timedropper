@@ -85,8 +85,8 @@ class Timedropper extends InputWidget
         $this->registerPlugin('timeDropper');
 
         return ($this->hasModel())
-            ? Html::activeInput('text', $this->model, $this->attribute)
-            : Html::input($this->name, $this->value);
+            ? Html::activeInput('text', $this->model, $this->attribute, $this->options)
+            : Html::input($this->name, $this->value, $this->options);
     }
 
     /**
