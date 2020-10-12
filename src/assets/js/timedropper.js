@@ -17,49 +17,8 @@
                     meridians: false,
                     mousewheel: false,
                     setCurrentTime: true,
-                    init_animation: 'fadein',
-                    // primaryColor: '#1977cc',
-                    // borderColor: '#1977cc',
-                    // backgroundColor: '#ffffff',
-                    // textColor: '#555555'
+                    init_animation: 'fadein'
                 }, options);
-
-            var _td_color = function (col, amt) {
-                var usePound = false;
-
-                if (col[0] === '#') {
-                    col = col.slice(1);
-                    usePound = true;
-                }
-
-                var num = parseInt(col, 16);
-
-                var r = (num >> 16) + amt;
-
-                if (r > 255) {
-                    r = 255;
-                } else if (r < 0) {
-                    r = 0;
-                }
-
-                var b = ((num >> 8) & 0x00FF) + amt;
-
-                if (b > 255) {
-                    b = 255;
-                } else if (b < 0) {
-                    b = 0;
-                }
-
-                var g = (num & 0x0000FF) + amt;
-
-                if (g > 255) {
-                    g = 255;
-                } else if (g < 0) {
-                    g = 0;
-                }
-
-                return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
-            };
 
             _td_input.addClass('td-input');
 
@@ -118,7 +77,7 @@
                         .replace(/\b(hh)\b/g, _td_num(Math.round(h)))
                         .replace(/\b(mm)\b/g, _td_num(Math.round(m)))
                         .replace(/\b(a)\b/g, a)
-                        .replace(/\b(A)\b/g, A);;
+                        .replace(/\b(A)\b/g, A);
                 },
                 _td_rotation = function (deg) {
                     var t = _td_c.find('.td-time span.on');
@@ -410,6 +369,12 @@
                 if (st) {
                     h = st[0].match(reg);
                     m = st[1].match(reg);
+                    if (h > 23) {
+                        h = 23;
+                    }
+                    if (m > 59) {
+                        m = 59;
+                    }
                     if (_td_input.val().indexOf('am') !== -1 || _td_input.val().indexOf('AM') !== -1 || _td_input.val().indexOf('pm') !== -1 || _td_input.val().indexOf('PM') !== -1) {
                         am = _td_input.val().indexOf('am') !== -1 || _td_input.val().indexOf('AM') !== -1;
 
@@ -450,7 +415,7 @@
                 _td_wheel_deg = _td_event_deg;
                 _td_init_deg = -1;
             });
-            _td_input.on('blur', function (e) {
+            _td_input.on('blur', function () {
                 // debugger;
                 _td_event = window.setTimeout(function () {
                     _td_container.addClass('td-fadeout').removeClass('td-' + _td_options.init_animation);
