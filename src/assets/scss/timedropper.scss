@@ -34,9 +34,9 @@
     }
 }
 
-.td-input {
-    cursor: pointer;
-}
+//.td-input {
+//    cursor: pointer;
+//}
 
 .td-overlay {
     height: 100%;
@@ -47,9 +47,7 @@
 }
 
 .td-clock {
-    background: #ffffff;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: #ffffff no-repeat center;
     background-size: cover;
     border-radius: 156px;
     box-shadow: 0 0 0 1px #1977cc, 0 0 0 8px rgba(0, 0, 0, 0.05);

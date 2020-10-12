@@ -8,7 +8,7 @@
                 _td_num = function (n) {
                     return n < 10 ? '0' + n : n;
                 },
-                _td_id = $('.td-clock').length,
+                _td_id = _td_input.prop('id') + '-clock',
                 _td_alert,
                 _td_event = null,
                 _td_options = $.extend({
@@ -18,10 +18,10 @@
                     mousewheel: false,
                     setCurrentTime: true,
                     init_animation: 'fadein',
-                    primaryColor: '#1977cc',
-                    borderColor: '#1977cc',
-                    backgroundColor: '#ffffff',
-                    textColor: '#555555'
+                    // primaryColor: '#1977cc',
+                    // borderColor: '#1977cc',
+                    // backgroundColor: '#ffffff',
+                    // textColor: '#555555'
                 }, options);
 
             var _td_color = function (col, amt) {
@@ -61,21 +61,14 @@
                 return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
             };
 
-            _td_input.prop({
-                'tabindex': '-1',
-                'readonly': true
-            }).addClass('td-input');
+            _td_input.addClass('td-input');
 
-            $('body').append('<div class="td-wrap td-n2" id="td-clock-' + _td_id + '"><div class="td-overlay"></div><div class="td-clock td-init"><div class="td-deg td-n"><div class="td-select"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 35.4" enable-background="new 0 0 100 35.4" xml:space="preserve"><g><path fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M98.1,33C85.4,21.5,68.5,14.5,50,14.5S14.6,21.5,1.9,33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1.9" y1="33" x2="1.9" y2="28.6"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1.9" y1="33" x2="6.3" y2="33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="98.1" y1="33" x2="93.7" y2="33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="98.1" y1="33" x2="98.1" y2="28.6"/></g></svg></div></div><div class="td-medirian"><span class="td-icon-am td-n">AM</span><span class="td-icon-pm td-n">PM</span></div><div class="td-lancette"><div></div><div></div></div><div class="td-time"><span class="on"></span>:<span></span></div></div></div>');
-
-            $('head').append('<style>#td-clock-' + _td_id + ' .td-clock {color:' + _td_options.textColor + ';background: ' + _td_options.backgroundColor + '; box-shadow: 0 0 0 1px ' + _td_options.borderColor + ',0 0 0 8px rgba(0, 0, 0, 0.05); } #td-clock-' + _td_id + ' .td-clock .td-time span.on { color:' + _td_options.primaryColor + '} #td-clock-' + _td_id + ' .td-clock:before { border-color: ' + _td_options.borderColor + '} #td-clock-' + _td_id + ' .td-select:after { box-shadow: 0 0 0 1px ' + _td_options.borderColor + ' } #td-clock-' + _td_id + ' .td-clock:before,#td-clock-' + _td_id + ' .td-select:after {background: ' + _td_options.backgroundColor + ';} #td-clock-' + _td_id + ' .td-lancette {border: 2px solid ' + _td_options.primaryColor + '; opacity:0.1}#td-clock-' + _td_id + ' .td-lancette div:after { background: ' + _td_options.primaryColor + ';} #td-clock-' + _td_id + ' .td-bulletpoint div:after { background:' + _td_options.primaryColor + '; opacity:0.1}</style>');
+            $('body').append('<div class="td-wrap td-n2" id="' + _td_id + '"><div class="td-overlay"></div><div class="td-clock td-init"><div class="td-deg td-n"><div class="td-select"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 35.4" enable-background="new 0 0 100 35.4" xml:space="preserve"><g><path fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M98.1,33C85.4,21.5,68.5,14.5,50,14.5S14.6,21.5,1.9,33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1.9" y1="33" x2="1.9" y2="28.6"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="1.9" y1="33" x2="6.3" y2="33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="98.1" y1="33" x2="93.7" y2="33"/><line fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="98.1" y1="33" x2="98.1" y2="28.6"/></g></svg></div></div><div class="td-medirian"><span class="td-icon-am td-n">AM</span><span class="td-icon-pm td-n">PM</span></div><div class="td-lancette"><div></div><div></div></div><div class="td-time"><span class="on"></span>:<span></span></div></div></div>');
 
             var
-                _td_container = $('#td-clock-' + _td_id),
+                _td_container = $('#' + _td_id),
                 _td_overlay = _td_container.find('.td-overlay'),
                 _td_c = _td_container.find('.td-clock');
-
-            _td_c.find('svg').attr('style', 'stroke:' + _td_options.borderColor);
 
             var _td_init_deg = -1,
                 _td_event_deg = 0,
@@ -95,6 +88,37 @@
                     _td_init_deg = -1;
                     _td_event_deg = deg;
                     _td_wheel_deg = deg;
+                },
+                _td_format = function (h, m, format) {
+                    if (!format) {
+                        format = _td_options.format;
+                    }
+
+                    var a, A;
+
+                    if (Math.round(h) >= 12 && Math.round(h) < 24) {
+                        h = Math.round(h) - 12;
+                        a = 'pm';
+                        A = 'PM';
+                    } else {
+                        h = Math.round(h);
+                        a = 'am';
+                        A = 'AM';
+                    }
+
+                    if (h === 0) {
+                        h = 12;
+                    }
+
+                    return format
+                        .replace(/\b(H)\b/g, Math.round(a=== 'pm' ? h + 12 : h))
+                        .replace(/\b(h)\b/g, Math.round(h))
+                        .replace(/\b(m)\b/g, Math.round(m))
+                        .replace(/\b(HH)\b/g, _td_num(Math.round(a === 'pm' ? h + 12 : h)))
+                        .replace(/\b(hh)\b/g, _td_num(Math.round(h)))
+                        .replace(/\b(mm)\b/g, _td_num(Math.round(m)))
+                        .replace(/\b(a)\b/g, a)
+                        .replace(/\b(A)\b/g, A);;
                 },
                 _td_rotation = function (deg) {
                     var t = _td_c.find('.td-time span.on');
@@ -147,31 +171,8 @@
 
                     _td_h = _td_c.find('.td-time span:first').attr('data-id');
                     _td_m = _td_c.find('.td-time span:last').attr('data-id');
-                    var a, A;
 
-                    if (Math.round(_td_h) >= 12 && Math.round(_td_h) < 24) {
-                        h = Math.round(_td_h) - 12;
-                        a = 'pm';
-                        A = 'PM';
-                    } else {
-                        h = Math.round(_td_h);
-                        a = 'am';
-                        A = 'AM';
-                    }
-
-                    if (h === 0) {
-                        h = 12;
-                    }
-
-                    var str = _td_options.format
-                        .replace(/\b(H)\b/g, Math.round(_td_h))
-                        .replace(/\b(h)\b/g, Math.round(h))
-                        .replace(/\b(m)\b/g, Math.round(_td_m))
-                        .replace(/\b(HH)\b/g, _td_num(Math.round(_td_h)))
-                        .replace(/\b(hh)\b/g, _td_num(Math.round(h)))
-                        .replace(/\b(mm)\b/g, _td_num(Math.round(_td_m)))
-                        .replace(/\b(a)\b/g, a)
-                        .replace(/\b(A)\b/g, A);
+                    var str = _td_format(_td_h, _td_m);
 
                     _td_input.val(str);
                 };
@@ -181,6 +182,11 @@
             }
 
             _td_c.find('.td-time span').on('click', function () {
+                // debugger;
+                if (_td_event) {
+                    window.clearInterval(_td_event);
+                    // _td_event;
+                }
                 var o = $(this);
                 var deg;
 
@@ -377,23 +383,91 @@
                 _td_rotation(_td_event_deg);
                 _td_wheel_deg = _td_event_deg;
                 _td_init_deg = -1;
-
             };
 
             _td_init();
 
-            _td_input.on('focus', function (e) {
-                e.preventDefault();
-                _td_input.blur();
+            // _td_input.on('focus', function (e) {
+            //     e.preventDefault();
+            //     _td_input.blur();
+            // });
+
+            _td_input.on('keyup', function () {
+                var d = new Date(),
+                    _td_span_h = _td_c.find('.td-time span:first'),
+                    _td_span_m = _td_c.find('.td-time span:last'),
+                    h,
+                    m,
+                    time = _td_format(d.getHours(), d.getMinutes());
+
+                if (_td_input.val().replace(/[^\d]/g, '').length !== time.replace(/[^\d]/g, '').length) {
+                    return;
+                }
+                var reg = /\d+/g,
+                    am;
+                var st = _td_input.val().split(':');
+
+                if (st) {
+                    h = st[0].match(reg);
+                    m = st[1].match(reg);
+                    if (_td_input.val().indexOf('am') !== -1 || _td_input.val().indexOf('AM') !== -1 || _td_input.val().indexOf('pm') !== -1 || _td_input.val().indexOf('PM') !== -1) {
+                        am = _td_input.val().indexOf('am') !== -1 || _td_input.val().indexOf('AM') !== -1;
+
+                        if (!am) {
+                            if (h < 13) {
+                                h = parseInt(h) + 12;
+                                if (h === 24) {
+                                    h = 0;
+                                }
+                            }
+                        } else if (h === 12) {
+                            h = 0;
+                        }
+                    } else if (h === 24) {
+                        h = 0;
+                    }
+                } else {
+                    if (!parseInt(_td_span_h.text())) {
+                        h = _td_num(d.getHours());
+                    } else {
+                        h = _td_num(_td_span_h.text());
+                    }
+                    if (!parseInt(_td_span_m.text())) {
+                        m = _td_num(d.getMinutes());
+                    } else {
+                        m = _td_num(_td_span_m.text());
+                    }
+                }
+
+                _td_span_h.attr('data-id', h).text(h);
+                _td_span_m.attr('data-id', m).text(m);
+
+                _td_event_deg = Math.round((h * 360 / 23));
+
+                _td_c.find('.td-lancette div:first').css('transform', 'rotate(' + Math.round((m * 360 / 59)) + 'deg)');
+
+                _td_rotation(_td_event_deg);
+                _td_wheel_deg = _td_event_deg;
+                _td_init_deg = -1;
+            });
+            _td_input.on('blur', function (e) {
+                // debugger;
+                _td_event = window.setTimeout(function () {
+                    _td_container.addClass('td-fadeout').removeClass('td-' + _td_options.init_animation);
+                    _td_event = setTimeout(function () {
+                        _td_container.removeClass('td-show');
+                    }, 300);
+                }, 300);
             });
 
             _td_input.on('click', function () {
+                // debugger;
                 clearInterval(_td_event);
 
                 _td_container.removeClass('td-fadeout');
                 _td_container.addClass('td-show').addClass('td-' + _td_options.init_animation);
                 _td_c.css({
-                    'top': (_td_input.offset().top + (_td_input.outerHeight() - 8)),
+                    'top': (_td_input.offset().top + _td_input.outerHeight() + 8),
                     'left': (_td_input.offset().left + (_td_input.outerWidth() / 2)) - (_td_c.outerWidth() / 2)
                 });
 
@@ -417,7 +491,7 @@
             $(window).on('resize', function () {
                 _td_define_deg();
                 _td_c.css({
-                    'top': (_td_input.offset().top + (_td_input.outerHeight() - 8)),
+                    'top': (_td_input.offset().top + (_td_input.outerHeight() + 8)),
                     'left': (_td_input.offset().left + (_td_input.outerWidth() / 2)) - (_td_c.outerWidth() / 2)
                 });
             });

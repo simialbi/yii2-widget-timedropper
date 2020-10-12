@@ -10,8 +10,15 @@ use simialbi\yii2\helpers\FormatConverter;
 use simialbi\yii2\widgets\InputWidget;
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use yii\widgets\MaskedInput;
 
+/**
+ * Timedropper is a jQuery time plugin by Felice Gattuso
+ *
+ * @see https://felicegattuso.com/projects/timedropper
+ * @author Simon Karlen <simi.albi@outlook.com>
+ * @author Felice Gattuso <me@felicegattuso.com>
+ */
 class Timedropper extends InputWidget
 {
     const ANIMATION_FADE_IN = 'fadeIn';
@@ -80,13 +87,61 @@ class Timedropper extends InputWidget
      */
     public function run()
     {
+        $id = $this->options['id'];
         $this->clientOptions = $this->getClientOptions();
 
         $this->registerPlugin('timeDropper');
 
-        return ($this->hasModel())
-            ? Html::activeInput('text', $this->model, $this->attribute, $this->options)
-            : Html::input($this->name, $this->value, $this->options);
+        $css = <<<CSS
+#$id-clock .td-clock {
+    background: {$this->backgroundColor};
+    box-shadow: 0 0 0 1px {$this->borderColor}, 0 0 0 8px rgba(0, 0, 0, .05);
+    color: {$this->textColor};
+}
+#$id-clock .td-clock .td-time span.on {
+    color: {$this->primaryColor};
+}
+#$id-clock .td-clock::before {
+    border-color: {$this->borderColor};
+}
+#$id-clock .td-select svg {
+    stroke: {$this->borderColor};
+}
+#$id-clock .td-select::after {
+    box-shadow: 0 0 0 1px {$this->borderColor};
+}
+#$id-clock .td-select::after, #$id-clock .td-clock::before {
+    background: {$this->backgroundColor};
+}
+#$id-clock .td-lancette {
+    border: 2px solid {$this->primaryColor};
+    opacity: .1;
+}
+#$id-clock .td-lancette div::after {
+    background: {$this->primaryColor};
+}
+#$id-clock .td-bulletpoint div::after {
+    background: {$this->primaryColor};
+    opacity: .1;
+}
+CSS;
+        $this->view->registerCss($css, [], "timedropper-$id");
+
+        if ($this->hasModel()) {
+            return MaskedInput::widget([
+                'model' => $this->model,
+                'attribute' => $this->attribute,
+                'options' => $this->options,
+                'mask' => '99:99'
+            ]);
+        }
+
+        return MaskedInput::widget([
+            'name' => $this->name,
+            'value' => $this->value,
+            'options' => $this->options,
+            'mask' => '99:99'
+        ]);
     }
 
     /**
@@ -109,10 +164,10 @@ class Timedropper extends InputWidget
             'mousewheel' => $this->mouseWheel,
             'init_animation' => $this->initAnimation,
             'setCurrentTime' => $this->setCurrentTime,
-            'primaryColor' => $this->primaryColor,
-            'textColor' => $this->textColor,
-            'backgroundColor' => $this->backgroundColor,
-            'borderColor' => $this->borderColor
+//            'primaryColor' => $this->primaryColor,
+//            'textColor' => $this->textColor,
+//            'backgroundColor' => $this->backgroundColor,
+//            'borderColor' => $this->borderColor
         ]);
     }
 }
