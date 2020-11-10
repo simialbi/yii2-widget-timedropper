@@ -55,7 +55,7 @@
 
                     var a, A;
 
-                    if (Math.round(h) >= 12 && Math.round(h) < 24) {
+                    if (Math.round(h) > 12 && Math.round(h) < 24) {
                         h = Math.round(h) - 12;
                         a = 'pm';
                         A = 'PM';
