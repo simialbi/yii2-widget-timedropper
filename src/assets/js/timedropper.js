@@ -304,6 +304,8 @@
                             }
                         } else if (h === 24) {
                             h = 0;
+                        } else if (h > 24) {
+                            h = 23;
                         }
                     } else {
                         if (!parseInt(_td_span_h.text())) {
