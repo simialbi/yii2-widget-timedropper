@@ -308,32 +308,24 @@
                             h = 23;
                         }
                     } else {
-                        if (!parseInt(_td_span_h.text())) {
-                            h = _td_num(d.getHours());
-                        } else {
-                            h = _td_num(_td_span_h.text());
+                        if (isNaN(h = parseInt(_td_span_h.text()))) {
+                            h = d.getHours();
                         }
-                        if (!parseInt(_td_span_m.text())) {
-                            m = _td_num(d.getMinutes());
-                        } else {
-                            m = _td_num(_td_span_m.text());
+                        if (isNaN(m = parseInt(_td_span_m.text()))) {
+                            m = d.getMinutes();
                         }
                     }
                 } else {
-                    if (!parseInt(_td_span_h.text())) {
-                        h = _td_num(d.getHours());
-                    } else {
-                        h = _td_num(_td_span_h.text());
+                    if (isNaN(h = parseInt(_td_span_h.text()))) {
+                        h = d.getHours();
                     }
-                    if (!parseInt(_td_span_m.text())) {
-                        m = _td_num(d.getMinutes());
-                    } else {
-                        m = _td_num(_td_span_m.text());
+                    if (isNaN(m = parseInt(_td_span_m.text()))) {
+                        m = d.getMinutes();
                     }
                 }
 
-                _td_span_h.attr('data-id', h).text(h);
-                _td_span_m.attr('data-id', m).text(m);
+                _td_span_h.attr('data-id', h).text(_td_num(h));
+                _td_span_m.attr('data-id', m).text(_td_num(m));
 
                 _td_event_deg = Math.round((h * 360 / 23));
 
