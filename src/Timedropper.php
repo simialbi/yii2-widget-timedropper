@@ -75,7 +75,7 @@ class Timedropper extends InputWidget
      * @throws \ReflectionException
      * @throws \yii\base\InvalidConfigException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -85,7 +85,7 @@ class Timedropper extends InputWidget
     /**
      * {@inheritDoc}
      */
-    public function run()
+    public function run(): string
     {
         $id = $this->options['id'];
         $this->clientOptions = $this->getClientOptions();
@@ -149,7 +149,7 @@ CSS;
      *
      * @return array
      */
-    protected function getClientOptions()
+    protected function getClientOptions(): array
     {
         $format = ArrayHelper::remove(
             $this->clientOptions,
